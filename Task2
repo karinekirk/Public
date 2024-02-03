@@ -1,0 +1,25 @@
+-- CREATE TABLE Q2.1
+CREATE TABLE Q2_1 (
+  ID INT IDENTITY(1, 1),
+  Gender VARCHAR(10),
+  IsBilingual VARCHAR(10),
+  PerfLevel VARCHAR(10)
+);
+
+-- INSERT INTO Q2.1
+INSERT INTO Q2_1 (Gender, IsBilingual, PerfLevel)
+VALUES
+  ('Male', 'Bil', 'L1'),
+  ('Female', 'NotB', 'L2'),
+  ('X', 'Bil', 'L3'),
+  ('Male', 'NotB', 'L3'),
+  ('Male', 'Bil', 'L4'),
+  ('Female', 'NotB', 'L1');
+
+-- TRANSFORMATION QUERY
+SELECT ID, Gender AS [Group], PerfLevel
+FROM Q2_1
+UNION ALL
+SELECT ID, IsBilingual AS [Group], PerfLevel
+FROM Q2_1
+ORDER BY ID, [Group];
