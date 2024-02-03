@@ -1,0 +1,23 @@
+import pandas as pd
+
+# Create a pandas DataFrame with the data
+data = {
+    'ID': [1, 2, 3, 4, 5, 6, 7, 8],
+    'DistrictName': ['Kent', 'Kent', 'Kent', 'Olympia', 'Olympia', 'Olympia', 'Seattle', 'Seattle'],
+    'DateSub': ['10/14/2023', '10/16/2023', '10/17/2023', '10/17/2023', '10/18/2023', '10/18/2023', '10/14/2023', '10/15/2023'],
+    'Data': [6, 9, 10, 3, 5, 4, 9, 7]
+}
+
+df = pd.DataFrame(data)
+
+# Convert the 'DateSub' column to datetime format
+df['DateSub'] = pd.to_datetime(df['DateSub'])
+
+# Sort the DataFrame by 'DateSub' in descending order
+df = df.sort_values(by='DateSub', ascending=False)
+
+# Drop duplicates based on 'DistrictName' and keep the first occurrence
+df = df.drop_duplicates(subset='DistrictName', keep='first')
+
+# Print the resulting DataFrame
+print(df)
