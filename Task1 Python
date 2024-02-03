@@ -1,0 +1,33 @@
+# Create a list of tuples representing the data
+data = [
+    (1, 'Kent', '2022-10-14', 6),
+    (2, 'Kent', '2022-10-16', 9),
+    (3, 'Kent', '2033-10-17', 10),
+    (4, 'Olympia', '2022-10-18', 3),
+    (5, 'Olympia', '2022-10-16', 5),
+    (6, 'Seattle', '2022-10-14', 9),
+    (7, 'Seattle', '2022-10-15', 7)
+]
+
+# Create two dictionaries to store earliest and latest submissions by district
+earliest_submissions = {}
+latest_submissions = {}
+
+# Iterate over the data to find earliest and latest submissions for each district
+for entry in data:
+    district = entry[1]
+    date = entry[2]
+    if district not in earliest_submissions or date < earliest_submissions[district][2]:
+        earliest_submissions[district] = entry
+    if district not in latest_submissions or date > latest_submissions[district][2]:
+        latest_submissions[district] = entry
+
+# Print the earliest submissions by district
+print("Earliest Submissions by District:")
+for district, submission in earliest_submissions.items():
+    print(submission)
+
+# Print the latest submissions by district
+print("\nLatest Submissions by District:")
+for district, submission in latest_submissions.items():
+    print(submission)
