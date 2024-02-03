@@ -1,0 +1,29 @@
+# Create a list of tuples representing the data
+data = [
+    (1, 'Male', 'Bil', 'L1'),
+    (2, 'Female', 'NotB', 'L2'),
+    (3, 'X', 'Bil', 'L3'),
+    (4, 'Male', 'NotB', 'L3'),
+    (5, 'Male', 'Bil', 'L4'),
+    (6, 'Female', 'NotB', 'L1')
+]
+
+# Initialize an empty list to store the transformed data
+transformed_data = []
+
+# Iterate over the data to transform the wide table to a long table
+for entry in data:
+    id = entry[0]
+    gender = entry[1]
+    is_bilingual = entry[2]
+    perf_level = entry[3]
+    
+    transformed_data.append((id, gender, perf_level))
+    transformed_data.append((id, is_bilingual, perf_level))
+
+# Sort the transformed data by ID and Group
+transformed_data.sort(key=lambda x: (x[0], x[1]))
+
+# Print the transformed data
+for entry in transformed_data:
+    print(entry)
