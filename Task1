@@ -1,0 +1,39 @@
+-- INIT database
+CREATE TABLE Q1 (
+  ID INT IDENTITY(1, 1),
+  DistrictName VARCHAR(100),
+  DateSub DATE ,
+  Data INT
+);
+
+INSERT INTO Q1 (DistrictName, DateSub, Data)
+VALUES
+  ('Kent', '2022-10-14', 6),
+  ('Kent', '2022-10-16', 9),
+  ('Kent', '2033-10-17', 10),
+  ('Olympia', '2022-10-18', 3),
+  ('Olympia', '2022-10-16', 5),
+  ('Seattle', '2022-10-14', 9),
+  ('Seattle', '2022-10-15', 7);
+  
+  
+-- QUERY database
+-- Earliest Submission by District
+SELECT Q1.ID, Q1.DistrictName, CONVERT(varchar(10), Q1.DateSub, 101) AS FormattedDate, Q1.Data
+FROM Q1
+INNER JOIN (
+  SELECT DistrictName, MIN(DateSub) AS earliest_datesub
+  FROM Q1
+  GROUP BY DistrictName
+) AS MinDates ON Q1.DistrictName = MinDates.DistrictName AND Q1.DateSub = MinDates.earliest_datesub
+ORDER BY Q1.DistrictName;
+
+-- Latest Submission by District
+SELECT Q1.ID, Q1.DistrictName, CONVERT(varchar(10), Q1.DateSub, 101) AS FormattedDate, Q1.Data
+FROM Q1
+INNER JOIN (
+  SELECT DistrictName, MAX(DateSub) AS latest_datesub
+  FROM Q1
+  GROUP BY DistrictName
+) AS MaxDates ON Q1.DistrictName = MaxDates.DistrictName AND Q1.DateSub = MaxDates.latest_datesub
+ORDER BY Q1.DistrictName;
